@@ -1,0 +1,20 @@
+{
+	"name": "barco-eventmaster-xml",
+	"version": "1.0.0",
+	"manufacturer": "Barco",
+	"product": [ "Event Master XML version" ],
+	"shortname": "EMT",
+	"description": "Evenmaster support via XML",
+	"main": "index.js",
+	"scripts": {
+	  "test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [
+	  "eventmaster",
+	  "EMT",
+		"XML",
+		"Toolset"
+	],
+	"author": "Jeffrey Davidsz <jeffrey.davidsz@vicreo.eu>",
+	"license": "MIT"
+}
