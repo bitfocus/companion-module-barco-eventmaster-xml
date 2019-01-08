@@ -98,6 +98,7 @@ instance.prototype.actions = function (system) {
 	var self = this;
 
 	self.system.emit('instance_actions', self.id, {
+		/* choices need some work
 		'multiviewerlayout': {
 			label: 'Change multiviewer layout',
 			options: [
@@ -120,7 +121,7 @@ instance.prototype.actions = function (system) {
 					default: '1'
 				}
 			]
-		},
+		},*/
 		'custom': {
 			label: 'Custom XML',
 			options: [
@@ -158,6 +159,7 @@ instance.prototype.action = function (action) {
 				self.tcp.write('<System id="0" GUID="542696d038d3-240352"><DestMgr id="0"><ScreenDestCol id="0"><ScreenDest id="0"><LayerCollection id="0"><Layer id="0"><LastUserKeyIdx>0</LastUserKeyIdx><ApplyUserKey>'+opt.userkeyNumber+'</ApplyUserKey></Layer></LayerCollection></ScreenDest></ScreenDestCol></DestMgr></System>');
 			}
 			break;
+			
 			case 'multiviewerlayout':
 			if (self.tcp !== undefined) {
 				debug('sending ', cmd, "to", self.tcp.host);
