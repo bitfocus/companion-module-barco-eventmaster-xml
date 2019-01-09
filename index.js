@@ -78,8 +78,8 @@ instance.prototype.config_fields = function () {
 				type: 'textinput',
 				id: 'macAddress',
 				label: 'Target MAC-Address',
-				width: 18
-				/*regex: '/^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/'*/
+				width: 18,
+				regex: '/^([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})$/'
 			}
 		]
 };
