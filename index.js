@@ -73,6 +73,13 @@ instance.prototype.config_fields = function () {
 				label: 'Target IP',
 				width: 6,
 				regex: self.REGEX_IP
+			},
+			{
+				type: 'textinput',
+				id: 'macAddress',
+				label: 'Target MAC-Address',
+				width: 18,
+				regex: '/^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/'
 			}
 		]
 };
@@ -109,7 +116,7 @@ instance.prototype.actions = function (system) {
 					choices: self.CHOICES_LAYOUT
 				}
 			]
-		},
+		},/* choices need some work
 		'userkeys': {
 			label: 'Apply userkey',
 			options: [
@@ -120,7 +127,7 @@ instance.prototype.actions = function (system) {
 					default: '1'
 				}
 			]
-		},
+		},*/
 		'custom': {
 			label: 'Custom XML',
 			options: [
@@ -154,14 +161,15 @@ instance.prototype.action = function (action) {
 
 			case 'userkeys':
 			if (self.tcp !== undefined) {
-				debug('sending ', cmd, "to", self.tcp.host);
+				//debug('sending ', cmd, "to", self.tcp.host);
 				self.tcp.write('<System id="0" GUID="542696d038d3-240352"><DestMgr id="0"><ScreenDestCol id="0"><ScreenDest id="0"><LayerCollection id="0"><Layer id="0"><LastUserKeyIdx>0</LastUserKeyIdx><ApplyUserKey>'+opt.userkeyNumber+'</ApplyUserKey></Layer></LayerCollection></ScreenDest></ScreenDestCol></DestMgr></System>');
 			}
 			break;
+
 			case 'multiviewerlayout':
 			if (self.tcp !== undefined) {
-				debug('sending ', cmd, "to", self.tcp.host);
-				self.tcp.write('<System id="0" GUID="542696d038d3-bcc201"><FrameCollection id="0"><Frame id="54:26:96:d0:38:d3"><MultiViewer id="0"><LayoutSelect>'+opt.layoutNumber+'</LayoutSelect></MultiViewer></Frame></FrameCollection></System>');
+				debug('sending to', self.tcp.macAddress);
+				self.tcp.write(`<System id="0" GUID="542696d038d3-bcc201"><FrameCollection id="0"><Frame id="${self.tcp.macAddress}"><MultiViewer id="0"><LayoutSelect>'+opt.layoutNumber+'</LayoutSelect></MultiViewer></Frame></FrameCollection></System>`);
 			}
 			break;
 
