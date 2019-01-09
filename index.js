@@ -78,8 +78,8 @@ instance.prototype.config_fields = function () {
 				type: 'textinput',
 				id: 'macAddress',
 				label: 'Target MAC-Address',
-				width: 18,
-				regex: '/^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/'
+				width: 18
+				/*regex: '/^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/'*/
 			}
 		]
 };
@@ -168,8 +168,9 @@ instance.prototype.action = function (action) {
 
 			case 'multiviewerlayout':
 			if (self.tcp !== undefined) {
-				debug('sending to', self.tcp.macAddress);
-				self.tcp.write(`<System id="0" GUID="542696d038d3-bcc201"><FrameCollection id="0"><Frame id="${self.tcp.macAddress}"><MultiViewer id="0"><LayoutSelect>'+opt.layoutNumber+'</LayoutSelect></MultiViewer></Frame></FrameCollection></System>`);
+				debug('sending multiviewer change to', self.config.macAddress);
+				self.tcp.write('<System id="0" GUID="542696d038d3-bcc201"><FrameCollection id="0"><Frame id="' + self.config.macAddress + '"><MultiViewer id="0"><LayoutSelect>' + opt.layoutNumber + '</LayoutSelect></MultiViewer></Frame></FrameCollection></System>');
+
 			}
 			break;
 
