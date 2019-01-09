@@ -65,7 +65,7 @@ instance.prototype.config_fields = function () {
 				id: 'info',
 				width: 12,
 				label: 'Information',
-				value: 'This module is for the Barco Eventmaster Toolset XML version. Be Carefull, no suport from Barco!'
+				value: 'This module is for the Barco Eventmaster Toolset xml version. Be Carefull, no suport from Barco!'
 			},
 			{
 				type: 'textinput',
