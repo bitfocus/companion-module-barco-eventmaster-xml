@@ -21,7 +21,7 @@ instance.prototype.init = function () {
 		self.status(self.STATUS_UNKNOWN);
 
 		if (self.config.host !== undefined) {
-			// Toolset for XML listen to port 9876
+			// EMT for XML listen to port 9876
 			self.tcp = new tcp(self.config.host, 9876);
 
 			self.tcp.on('status_change', function (status, message) {
