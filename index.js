@@ -104,7 +104,7 @@ instance.prototype.CHOICES_LAYOUT = [
 instance.prototype.actions = function (system) {
 	var self = this;
 
-	self.system.emit('instance_actions', self.id, {
+	var actions = {
 		'multiviewerlayout': {
 			label: 'Change multiviewer layout',
 			options: [
@@ -116,18 +116,31 @@ instance.prototype.actions = function (system) {
 					choices: self.CHOICES_LAYOUT
 				}
 			]
-		},/* choices need some work
+		},
 		'userkeys': {
 			label: 'Apply userkey',
 			options: [
 				{
 					type: 'textinput',
-					label: 'userkey number',
-					id: 'userkeyNumber',
-					default: '1'
+					label: 'userkey number (sending -1)',
+					id: 'userKey',
+					default: '1',
+					regex: '/^[1-9]*$/'
+				},{
+					type: 'textinput',
+					label: 'Screen Destination (sending -1)',
+					id: 'screenDest',
+					default: '1',
+					regex: '/^[1-9]*$/'
+				},{
+					type: 'textinput',
+					label: 'Layer (sending -1)',
+					id: 'layer',
+					default: '1',
+					regex: '/^[1-9]*$/'
 				}
 			]
-		},*/
+		},
 		'custom': {
 			label: 'Custom XML',
 			options: [
@@ -139,9 +152,10 @@ instance.prototype.actions = function (system) {
 				}
 			]
 		}
-	});
-};
+	};
 
+	self.setActions(actions);
+};
 
 instance.prototype.action = function (action) {
 		var self = this;
@@ -149,37 +163,29 @@ instance.prototype.action = function (action) {
 		var cmd;
 		var opt = action.options;
 
-		switch (action.action) {
+		switch (id) {
 
 			case 'custom':
-			if (self.tcp !== undefined) {
 				cmd = opt.custom ;
-				debug('sending ', cmd, "to", self.tcp.host);
-				self.tcp.write(cmd);
-			}
-			break;
+				break
 
 			case 'userkeys':
-			if (self.tcp !== undefined) {
-				//debug('sending ', cmd, "to", self.tcp.host);
-				self.tcp.write('<System id="0" GUID="542696d038d3-240352"><DestMgr id="0"><ScreenDestCol id="0"><ScreenDest id="0"><LayerCollection id="0"><Layer id="0"><LastUserKeyIdx>0</LastUserKeyIdx><ApplyUserKey>'+opt.userkeyNumber+'</ApplyUserKey></Layer></LayerCollection></ScreenDest></ScreenDestCol></DestMgr></System>');
-			}
-			break;
+				var screenDest = parseInt(opt.screenDest) - 1;
+				var userKey = parseInt(opt.userKey) - 1;
+				var layer = parseInt(opt.layer) - 1;
+				cmd = `<System id="0" GUID="005056c00001-00617e"><DestMgr id="0"><ScreenDestCol id="0"><ScreenDest id="${screenDest}"><LayerCollection id="0"><Layer id="${layer}"><LastUserKeyIdx>${userKey}</LastUserKeyIdx><ApplyUserKey>${userKey}</ApplyUserKey></Layer></LayerCollection></ScreenDest></ScreenDestCol></DestMgr></System>`;
+				break
 
 			case 'multiviewerlayout':
-			if (self.tcp !== undefined) {
-				debug('sending multiviewer change to', self.config.macAddress);
-				self.tcp.write('<System id="0" GUID="542696d038d3-bcc201"><FrameCollection id="0"><Frame id="' + self.config.macAddress + '"><MultiViewer id="0"><LayoutSelect>' + opt.layoutNumber + '</LayoutSelect></MultiViewer></Frame></FrameCollection></System>');
-
-			}
-			break;
-
+				cmd = `<System id="0" GUID="542696d038d3-bcc201"><FrameCollection id="0"><Frame id="${self.config.macAddress}"><MultiViewer id="0"><LayoutSelect>${opt.layoutNumber}</LayoutSelect></MultiViewer></Frame></FrameCollection></System>`;
+				log('log', 'sending multiviewer layout: ' + opt.layoutNumber);
+				break
 		}
 
 		if (cmd !== undefined) {
 			if (self.tcp !== undefined) {
-				//debug('sending ', cmd, "to", self.tcp.host);
-				//self.tcp.send(cmd);
+				debug('sending ', cmd, "to", self.tcp.host);
+				self.tcp.write(cmd);
 			}
 		}
 };
