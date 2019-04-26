@@ -1,6 +1,6 @@
 {
 	"name": "barco-eventmaster-xml",
-	"version": "1.2.3",
+	"version": "1.2.4",
 	"api_version": "1.0.0",
 	"manufacturer": "Barco",
 	"product": [ "Event Master xml" ],
