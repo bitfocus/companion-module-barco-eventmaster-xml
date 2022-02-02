@@ -3,7 +3,9 @@
 	"version": "1.2.4",
 	"api_version": "1.0.0",
 	"manufacturer": "Barco",
-	"product": [ "Event Master xml" ],
+	"product": [
+		"Event Master xml"
+	],
 	"shortname": "eventmaster xml",
 	"description": "Barco EventMaster xml plugin for Companion",
 	"main": "index.js",
@@ -15,5 +17,13 @@
 		"Image Processing"
 	],
 	"author": "Jeffrey Davidsz <jeffrey.davidsz@vicreo.eu>",
-	"license": "MIT"
+	"license": "MIT",
+	"homepage": "https://github.com/bitfocus/companion-module-barco-eventmaster-xml#readme",
+	"bugs": {
+		"url": "https://github.com/bitfocus/companion-module-barco-eventmaster-xml/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/bitfocus/companion-module-barco-eventmaster-xml.git"
+	}
 }
