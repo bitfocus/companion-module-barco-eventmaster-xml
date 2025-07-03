@@ -1,29 +1,19 @@
 {
-	"name": "barco-eventmaster-xml",
-	"version": "1.2.5",
-	"api_version": "1.0.0",
-	"manufacturer": "Barco",
-	"product": [
-		"Event Master xml"
-	],
-	"shortname": "eventmaster xml",
-	"description": "Barco EventMaster xml plugin for Companion",
-	"main": "index.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"keywords": [
-		"Protocol",
-		"Image Processing"
-	],
-	"author": "Jeffrey Davidsz <jeffrey.davidsz@vicreo.eu>",
-	"license": "MIT",
-	"homepage": "https://github.com/bitfocus/companion-module-barco-eventmaster-xml#readme",
-	"bugs": {
-		"url": "https://github.com/bitfocus/companion-module-barco-eventmaster-xml/issues"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/bitfocus/companion-module-barco-eventmaster-xml.git"
-	}
+  "name": "barco-dp",
+  "version": "2.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bitfocus/companion-module-barco-dp.git"
+  },
+  "dependencies": {
+    "@companion-module/base": "~1.12.1"
+  },
+  "devDependencies": {
+    "@companion-module/tools": "^2.3.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
 }
