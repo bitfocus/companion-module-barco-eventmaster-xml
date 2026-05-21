@@ -21,11 +21,6 @@
 		"entrypoint": "../index.js"
 	},
 	"manufacturer": "Barco",
-	"products": [
-		"Event Master xml"
-	],
-	"keywords": [
-		"Protocol",
-		"Image Processing"
-	]
+	"products": ["Event Master xml"],
+	"keywords": ["Protocol", "Image Processing"]
 }
